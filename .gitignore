@@ -2,3 +2,4 @@ api_key.txt
 dropbox_token.txt
 *.csv
 *.json
+.vscode/
