@@ -16,7 +16,7 @@ The "etsy_csv_getter.py" script can be run directly, the following variables are
 
 If also using dropbox:
 
-Configer the "BACKUP" path, where the csv will be uploaded to, is relative to folder of dropbox app connected to the given token. The default is the root directory.
+Configer the "BACKUP" path, where the csv will be uploaded to, is relative to folder of dropbox app connected to the given token. The default is the root directory. When giving the link to the csv on dropbox to the catalogue manager, set "dl=1" at the end of the link!
 
 For ease of use this can be packaged into a single script with a simple interface and then made into an executable, "fully_automated.py" is what I am using.
 
