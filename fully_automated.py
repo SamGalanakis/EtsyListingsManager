@@ -14,7 +14,7 @@ sku_base=skubaselist[shop_index-1]
 with open("api_key.txt","r") as f:
         api_key=f.read()
 
-ListingToFacebookCsv(etsystore,api_key,etsystore,sku_base=sku_base)
+ListingToFacebookCsv(etsystore,api_key,etsystore,sku_base="")
 
 
 backup(f"{etsystore}_facebook_catalogue.csv",f"/{etsystore}_facebook_catalogue.csv")

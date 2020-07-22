@@ -1,6 +1,8 @@
 import requests
 from time import sleep
 import pandas as pd
+import re
+import collections
 
 
 
@@ -30,6 +32,10 @@ def ListingToFacebookCsv(shop_string,api_key,brand_string,sku_base="",condition=
         # count = response["count"]
         listings= response["results"]
         for listing in listings:
+            if len(sku_base)==0 and len(listing["sku"])==0:
+                no_sku_title= listing["title"]
+                print(f"Listing titled: {no_sku_title}  \n skipped due to not having an sku!")
+                continue #skip no sku listings when using etsy sku
             listing_urls.append(listing["url"])
             etsy_sku.append(listing["sku"])
             image_urls.append(listing["Images"][0]["url_fullxfull"])
@@ -41,7 +47,7 @@ def ListingToFacebookCsv(shop_string,api_key,brand_string,sku_base="",condition=
             descriptions.append(listing["description"])
             prices.append(listing["price"]+" USD")
 
-        if 100 != len(listings): 
+        if 100 != len(listings): #stop when reached last page by checking that page has less than max listing
             got_all=True
 
     availabilities=["in stock"]*len(titles)
@@ -49,7 +55,14 @@ def ListingToFacebookCsv(shop_string,api_key,brand_string,sku_base="",condition=
     brands=[brand_string]*len(titles)
 
     if len(sku_base)==0:  #if no sku base given, default to etsy sku
-        id_list=etsy_sku
+        id_list=[sku_list[0] for sku_list in etsy_sku] #sku for product returned as list so take first
+        multiples=[(item,count) for item, count in collections.Counter(id_list).items() if count > 1]
+        if len(multiples)>0:
+            print("The following sku pairs are duplicated and need to be fixed before syncing")
+            for entry in multiples:
+                print(f"SKU: {entry[0]} Number of duplicates: {entry[1]}")
+            print("Exiting program, nothing saved/synced, fix duplicates and rerun!")
+
     else:
         id_list=[f"{sku_base}_{i}" for i in range(0,len(titles))]
     
