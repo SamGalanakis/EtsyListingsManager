@@ -2,10 +2,24 @@ from etsy_csv_getter import ListingToFacebookCsv
 from save_to_dropbox import backup
 
 
-shop_index = input("Type 1 for ahueofGreekBlue or 2 for ahueofDuckeggblue: ")
-shop_index = int(shop_index)
-assert (shop_index ==1 or shop_index ==2), "Invalid input, should be 1 or 2"
+
 etsyshoplist=["ahueofGreekblue","ahueofDuckeggblue"]
+valid_input=False
+while not valid_input:
+        shop_index = input("Type 1 for ahueofGreekBlue or 2 for ahueofDuckeggblue: ")
+        try:
+                shop_index = int(shop_index)
+        except:
+                print("Invalid input for shop index, not an integer, try again!")
+                continue
+
+        if shop_index in range(0,len(etsyshoplist)):
+                valid_input=True
+        else:
+                print("Shop index does not match shop in shop list, please try again!")
+
+
+
 skubaselist=["agreek","aduck"]
 
 etsystore=etsyshoplist[shop_index-1]
