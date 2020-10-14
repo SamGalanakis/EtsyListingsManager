@@ -36,7 +36,9 @@ def ListingToFacebookCsv(shop_string,api_key,brand_string,sku_base="",condition=
                 no_sku_title= listing["title"]
                 print(f"Listing titled: {no_sku_title}  \n skipped due to not having an sku!")
                 continue #skip no sku listings when using etsy sku
-            listing_urls.append(listing["url"])
+            listing_id = listing['listing_id']
+            url = f'https://{shop_string}.etsy.com/listing/{listing_id}'
+            listing_urls.append(url)
             etsy_sku.append(listing["sku"])
             image_urls.append(listing["Images"][0]["url_fullxfull"])
             extra_images_string=""

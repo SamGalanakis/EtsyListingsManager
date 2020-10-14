@@ -13,7 +13,7 @@ while not valid_input:
                 print("Invalid input for shop index, not an integer, try again!")
                 continue
 
-        if shop_index in range(0,len(etsyshoplist)):
+        if shop_index in range(0,len(etsyshoplist)+1):
                 valid_input=True
         else:
                 print("Shop index does not match shop in shop list, please try again!")
