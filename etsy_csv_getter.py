@@ -63,7 +63,7 @@ def ListingToFacebookCsv(shop_string,api_key,brand_string,sku_base="",condition=
             print("The following sku pairs are duplicated and need to be fixed before syncing")
             for entry in multiples:
                 print(f"SKU: {entry[0]} Number of duplicates: {entry[1]}")
-            print("Exiting program, nothing saved/synced, fix duplicates and rerun!")
+            raise Exception("Exiting program, nothing saved/synced, fix duplicates and rerun!")
 
     else:
         id_list=[f"{sku_base}_{i}" for i in range(0,len(titles))]
